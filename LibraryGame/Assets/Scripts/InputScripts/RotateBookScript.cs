@@ -17,8 +17,9 @@ public class RotateBookScript : MonoBehaviour
         }
     }
 
-    private void OnMouseDrag()
+    private void OnMouseDrag()//dit werkt niet want dit moet met colliders zijn dus even een nieuwe update functie maken
     {
+        Debug.Log("dasdsdsa");
         //Calculate distance between mouse first point and were it is going to;
         Vector3 MouseDelta = Input.mousePosition - FirstMousePos;
 
