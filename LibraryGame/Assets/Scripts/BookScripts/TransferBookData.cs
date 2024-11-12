@@ -24,7 +24,7 @@ public class TransferBookData : MonoBehaviour
 
     public void SwitchBooks()
     {
-        int RandomNumber = Random.RandomRange(0, Books.Count);
+        int RandomNumber = Random.Range(0, Books.Count);
 
         ScriptableBook CurrentBook = Books[RandomNumber];
 
