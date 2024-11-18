@@ -15,5 +15,7 @@ MonoBehaviour:
   Name: The big man
   Author: Dave Coolguy
   PublicationDate: 3-11-2024
+  Publisher: The weird publisher
+  DueDate: 18-11-2024
   FrontCover: {fileID: 0}
   BackCover: {fileID: 0}

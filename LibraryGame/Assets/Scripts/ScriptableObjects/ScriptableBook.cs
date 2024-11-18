@@ -8,6 +8,8 @@ public class ScriptableBook : ScriptableObject
     public string Name;
     public string Author;
     public string PublicationDate;
+    public string Publisher;
+    public string DueDate;
     public Sprite FrontCover;
     public Sprite BackCover;
 }
