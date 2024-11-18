@@ -16,30 +16,18 @@ public class TransferBookData : MonoBehaviour
     private Sprite FrontCover;
     private Sprite BackCover;
 
-    private void Start()
-    {
-        SwitchBooks();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            SwitchBooks();
-        }
-    }
-
-    public void SwitchBooks()
+    public void SwitchBooks(ScriptableBook CurrentBook)
     {
         int RandomNumber = Random.Range(0, Books.Count);
-
-        ScriptableBook CurrentBook = Books[RandomNumber];
 
         Name.text = CurrentBook.Name;
         Author.text = CurrentBook.Author;
         PublicationDate.text = CurrentBook.PublicationDate;
         Publisher.text = CurrentBook.Publisher;
         DueDate.text = "Due date: " + CurrentBook.DueDate;
+
+        //temp to make a wrong author
+        Author.text = GameObject.Find("RandomAuthor").GetComponent<RandomAuthorScript>().MakeAuthorUp(CurrentBook.Author);
 
         gameObject.GetComponent<BookInformation>().RightBook = CurrentBook;
     }

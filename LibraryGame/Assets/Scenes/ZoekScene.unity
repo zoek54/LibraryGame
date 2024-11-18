@@ -820,6 +820,61 @@ MonoBehaviour:
   IsScrolling: 0
   IsPlayingAnimation: 1
   Ani: {fileID: 65550600}
+--- !u!1 &558732471
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 558732472}
+  - component: {fileID: 558732473}
+  m_Layer: 0
+  m_Name: RandomAuthor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &558732472
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 558732471}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 789146659}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &558732473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 558732471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3945bb0e5677915468a1302d2daa1e26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HankCoolGuyAlt:
+  - Hank cool giy
+  - Henk cool guy
+  - Henk col guy
+  - Henk sad guy
+  DaveCoolGuyAlt:
+  - Dame cool guy
+  - Dave sod guy
+  - Dive sad guy
+  - Dave happy guy
+  - Dave big guy
+  - Dave sad girl
 --- !u!1 &572937848
 GameObject:
   m_ObjectHideFlags: 0
@@ -1214,6 +1269,7 @@ Transform:
   - {fileID: 585438204}
   - {fileID: 639852757}
   - {fileID: 550223314}
+  - {fileID: 789146659}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1351,6 +1407,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 766981830}
   m_CullTransparentMesh: 1
+--- !u!1 &789146658
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 789146659}
+  - component: {fileID: 789146660}
+  m_Layer: 0
+  m_Name: CreateBook
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &789146659
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789146658}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 558732472}
+  m_Father: {fileID: 765007688}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &789146660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789146658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a60a1252ea5bba46aba9f12a2ec5f51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Books:
+  - {fileID: 11400000, guid: da32c0ce7a1f52348be4d3ed1e8c3f09, type: 2}
+  - {fileID: 11400000, guid: 3b51fb90be2e1a348819d02e13370065, type: 2}
 --- !u!1 &897292493
 GameObject:
   m_ObjectHideFlags: 0
