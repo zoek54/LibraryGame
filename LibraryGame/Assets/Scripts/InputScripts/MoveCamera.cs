@@ -10,8 +10,9 @@ public class MoveCamera : MonoBehaviour
     private Vector3 AllInspecPos = new Vector3(0, 2, -18); //1
 
     [Header("Information")]
-    private float Speed = 5f;
+    public float ScrollingSpeed;
     public bool IsScrolling;
+    public bool IsPlayingAnimation;
     private float PosNumber = 3;
 
     [Header("Animator")]
@@ -29,7 +30,7 @@ public class MoveCamera : MonoBehaviour
 
     public void DetectScrolling()
     {
-        if (!IsScrolling)
+        if (!IsScrolling && !IsPlayingAnimation)
         {
             if (Input.mouseScrollDelta.y > 0)//Upwards
             {
@@ -54,7 +55,7 @@ public class MoveCamera : MonoBehaviour
     {
         while(Vector3.Distance(Camera.main.transform.position, EndPos) > 0.1f)
         {
-            Camera.main.transform.position = Vector3.MoveTowards(Camera.main.transform.position, EndPos, Speed*Time.deltaTime);
+            Camera.main.transform.position = Vector3.MoveTowards(Camera.main.transform.position, EndPos, ScrollingSpeed*Time.deltaTime);
             yield return null;
         }
         IsScrolling = false;
@@ -73,7 +74,10 @@ public class MoveCamera : MonoBehaviour
                 StartCoroutine(MoveTheCamera(RuleInspecPos));
                 PosNumber -= 1;
                 Ani.speed = 1;
+
+                Ani.enabled = true;
                 Ani.Play("LayDownTheBook");
+                IsPlayingAnimation = true;
             }
         }
         else if(PosNumber == 2)
@@ -84,6 +88,7 @@ public class MoveCamera : MonoBehaviour
                 PosNumber += 1;
                 Ani.speed = 1;
                 Ani.Play("PickUpTheBook");
+                IsPlayingAnimation = true;
             }
             else if (Numberadd == -1)
             {
