@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class RandomAuthorScript : MonoBehaviour
 {
-
     //alt = alternative;
     public List<string> HankCoolGuyAlt;
     public List<string> DaveCoolGuyAlt;

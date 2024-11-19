@@ -15,9 +15,13 @@ public class RotateBookScript : MonoBehaviour
     private GameObject Book;
     private bool MouseButtonIsDown;
 
+    [Header("Refrences")]
+    private ScannerScript scannerScript;
+
     private void Start()
     {
         Book = GameObject.Find("Book").gameObject;
+        scannerScript = GameObject.Find("Scanner").GetComponent<ScannerScript>();
     }
 
     private void Update()
@@ -44,7 +48,7 @@ public class RotateBookScript : MonoBehaviour
 
     public void RotateBook()
     {
-        if (MouseButtonIsDown)
+        if (MouseButtonIsDown && !scannerScript.IsFollowingMouse)
         {
             //Calculate distance between mouse first point and were it is going to;
             Vector3 MouseDelta = Input.mousePosition - FirstMousePos;

@@ -5,8 +5,6 @@ using TMPro;
 
 public class TransferBookData : MonoBehaviour
 {
-    public List<ScriptableBook> Books;
-
     public TextMeshProUGUI Name;
     public TextMeshProUGUI Author;
     public TextMeshProUGUI PublicationDate;
@@ -16,19 +14,16 @@ public class TransferBookData : MonoBehaviour
     private Sprite FrontCover;
     private Sprite BackCover;
 
+    public ScriptableBook CorrectBook;
+
     public void SwitchBooks(ScriptableBook CurrentBook)
     {
-        int RandomNumber = Random.Range(0, Books.Count);
-
         Name.text = CurrentBook.Name;
         Author.text = CurrentBook.Author;
         PublicationDate.text = CurrentBook.PublicationDate;
         Publisher.text = CurrentBook.Publisher;
         DueDate.text = "Due date: " + CurrentBook.DueDate;
 
-        //temp to make a wrong author
-        Author.text = GameObject.Find("RandomAuthor").GetComponent<RandomAuthorScript>().MakeAuthorUp(CurrentBook.Author);
-
-        gameObject.GetComponent<BookInformation>().RightBook = CurrentBook;
+        gameObject.GetComponent<BookInformation>().RightBook = CorrectBook;
     }
 }
