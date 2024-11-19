@@ -45,8 +45,6 @@ public class CreateBook : MonoBehaviour
 
         if(RandomNumber <= 33)
         {
-            Debug.Log("BookIscorrect");
-
             ScriptableBook TempBook = Books[Random.Range(0, Books.Count)];
             transferBookData.CorrectBook = TempBook;
 
@@ -60,8 +58,6 @@ public class CreateBook : MonoBehaviour
         }
         else if (RandomNumber > 33)
         {
-            Debug.Log("BookIsIncorrect");
-
             ScriptableBook TempBook = Books[Random.Range(0, Books.Count)];
             transferBookData.CorrectBook = TempBook;
 

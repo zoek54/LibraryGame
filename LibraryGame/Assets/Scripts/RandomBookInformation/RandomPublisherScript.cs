@@ -20,7 +20,6 @@ public class RandomPublisherScript : MonoBehaviour
             NewPublisher = ThePolarbears[Random.Range(0, ThePolarbears.Count)];
         }
 
-        Debug.Log(NewPublisher);
         return NewPublisher;
     }
 }

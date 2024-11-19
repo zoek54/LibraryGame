@@ -20,7 +20,6 @@ public class RandomPublishDateScript : MonoBehaviour
             NewPublisherDate = TheLittleManDate[Random.Range(0, TheLittleManDate.Count)];
         }
 
-        Debug.Log(NewPublisherDate);
         return NewPublisherDate;
     }
 }

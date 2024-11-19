@@ -20,7 +20,6 @@ public class RandomTitleScript : MonoBehaviour
             NewTitle = TheLittlemanAlt[Random.Range(0, TheLittlemanAlt.Count)];
         }
 
-        Debug.Log(NewTitle);
         return NewTitle;
     }
 }

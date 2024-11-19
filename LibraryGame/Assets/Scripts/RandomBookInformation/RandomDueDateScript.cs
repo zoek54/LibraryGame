@@ -20,7 +20,6 @@ public class RandomDueDateScript : MonoBehaviour
             NewDueDate = TheLittleManDueDate[Random.Range(0, TheLittleManDueDate.Count)];
         }
 
-        Debug.Log(NewDueDate);
         return NewDueDate;
     }
 }
