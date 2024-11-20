@@ -6,18 +6,13 @@ public class ScannerScript : MonoBehaviour
 {
     public float RayDistance = 10f;
     public bool IsFollowingMouse;
-    private GameObject Light;
-
-    private void Start()
-    {
-        Light = GameObject.Find("ScannerLight");
-    }
+    public GameObject RedLight;
 
     private void Update()
     {
         if (Input.GetMouseButtonDown(1) && IsFollowingMouse)
         {
-            Light.SetActive(false);
+            RedLight.SetActive(false);
             IsFollowingMouse = false;
         }
 
@@ -36,7 +31,7 @@ public class ScannerScript : MonoBehaviour
             {
                 if (hit.transform.gameObject.GetComponent<ScannerScript>())
                 {
-                    Light.SetActive(true);
+                    RedLight.SetActive(true);
                     IsFollowingMouse = true;
                 }
             }

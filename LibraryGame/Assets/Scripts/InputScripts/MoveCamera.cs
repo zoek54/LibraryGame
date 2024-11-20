@@ -5,9 +5,9 @@ using UnityEngine;
 public class MoveCamera : MonoBehaviour
 {
     [Header("Vectors")]
-    private Vector3 BookInspectPos = new Vector3(0, 1, -10); //3
-    private Vector3 RuleInspecPos = new Vector3(0, 2, -14); //2
-    private Vector3 AllInspecPos = new Vector3(0, 2, -18); //1
+    private Vector3 BookInspectPos = new Vector3(5.58f, 1.79f, -0.28f); //3
+    private Vector3 RuleInspecPos = new Vector3(6.66f, 1.79f, -0.28f); //2
+    private Vector3 AllInspecPos = new Vector3(7.34f, 2.1f, -0.28f); //1
 
     [Header("Information")]
     public float ScrollingSpeed;
