@@ -15,12 +15,9 @@ public class MoveCamera : MonoBehaviour
     public bool IsPlayingAnimation;
     private float PosNumber = 3;
 
-    [Header("Animator")]
-    public Animator Ani;
-
     private void Start()
     {
-        Ani.Play("PickUpTheBook");
+        //start animation here
     }
 
     private void Update()
@@ -73,10 +70,8 @@ public class MoveCamera : MonoBehaviour
             {
                 StartCoroutine(MoveTheCamera(RuleInspecPos));
                 PosNumber -= 1;
-                Ani.speed = 1;
 
-                Ani.enabled = true;
-                Ani.Play("LayDownTheBook");
+                //play the laydownthebookhere
                 IsPlayingAnimation = true;
             }
         }
@@ -86,8 +81,7 @@ public class MoveCamera : MonoBehaviour
             {
                 StartCoroutine(MoveTheCamera(BookInspectPos));
                 PosNumber += 1;
-                Ani.speed = 1;
-                Ani.Play("PickUpTheBook");
+                //pick up the book here
                 IsPlayingAnimation = true;
             }
             else if (Numberadd == -1)
