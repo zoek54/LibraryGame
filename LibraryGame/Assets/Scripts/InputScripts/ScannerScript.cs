@@ -45,6 +45,7 @@ public class ScannerScript : MonoBehaviour
         {
             if(hit.transform.gameObject.tag == "QrCode")
             {
+                hit.transform.parent.GetComponent<BookInformation>().CurrentBook = hit.transform.parent.gameObject;
                 hit.transform.parent.GetComponent<BookInformation>().QrCodedScanned();
             }
         }

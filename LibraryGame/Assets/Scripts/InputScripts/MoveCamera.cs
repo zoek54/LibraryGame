@@ -15,9 +15,16 @@ public class MoveCamera : MonoBehaviour
     public bool IsPlayingAnimation;
     private float PosNumber = 3;
 
+    //other scripts;
+    private BookAnimations bookAnimations;
+
     private void Start()
     {
+        bookAnimations = GameObject.Find("Book").GetComponent<BookAnimations>();
+
         //start animation here
+        StartCoroutine(bookAnimations.PickBookUp());
+        StartCoroutine(bookAnimations.RotateBookUp());
     }
 
     private void Update()
@@ -72,6 +79,8 @@ public class MoveCamera : MonoBehaviour
                 PosNumber -= 1;
 
                 //play the laydownthebookhere
+                StartCoroutine(bookAnimations.RotateBookDown());
+
                 IsPlayingAnimation = true;
             }
         }
@@ -82,6 +91,9 @@ public class MoveCamera : MonoBehaviour
                 StartCoroutine(MoveTheCamera(BookInspectPos));
                 PosNumber += 1;
                 //pick up the book here
+                StartCoroutine(bookAnimations.PickBookUp());
+                StartCoroutine(bookAnimations.RotateBookUp());
+
                 IsPlayingAnimation = true;
             }
             else if (Numberadd == -1)
