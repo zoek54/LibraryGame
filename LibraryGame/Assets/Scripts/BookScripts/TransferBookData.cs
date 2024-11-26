@@ -22,7 +22,7 @@ public class TransferBookData : MonoBehaviour
         Author.text = CurrentBook.Author;
         PublicationDate.text = CurrentBook.PublicationDate;
         Publisher.text = CurrentBook.Publisher;
-        DueDate.text = "Due date: " + CurrentBook.DueDate;
+        DueDate.text = CurrentBook.DueDate;
 
         gameObject.GetComponent<BookInformation>().RightBook = CorrectBook;
     }

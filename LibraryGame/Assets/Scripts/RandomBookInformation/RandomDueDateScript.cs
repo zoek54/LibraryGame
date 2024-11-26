@@ -11,11 +11,11 @@ public class RandomDueDateScript : MonoBehaviour
     public string MakeDueDateUp(string DueDate)
     {
         string NewDueDate = "Fix your shit";
-        if (DueDate == "18-11-2024")
+        if (DueDate == "Due date: 18-11-2024")
         {
             NewDueDate = TheBigManDueDate[Random.Range(0, TheBigManDueDate.Count)];
         }
-        else if (DueDate == "32-12-2024")
+        else if (DueDate == "Due date: 32-12-2024")
         {
             NewDueDate = TheLittleManDueDate[Random.Range(0, TheLittleManDueDate.Count)];
         }

@@ -25,5 +25,7 @@ public class BookInformation : MonoBehaviour
 
         bookCheckScript.CorrectBook = RightBook;
         bookCheckScript.CurrentBook = CurrentBook;
+
+        bookCheckScript.CheckBook();
     }
 }

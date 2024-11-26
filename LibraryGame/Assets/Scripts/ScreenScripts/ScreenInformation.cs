@@ -15,7 +15,7 @@ public class ScreenInformation : MonoBehaviour
         string DueDate = RightBook.DueDate;
         string Publisher = RightBook.Publisher;
 
-        string EndText = " Title: " + Title + "<br> Author: " + Author + "<br> Publisher: " + Publisher + "<br> Publish date: " + PublicationDate + "<br> Due date: " + DueDate;
+        string EndText = " Title: " + Title + "<br> Author: " + Author + "<br> Publisher: " + Publisher + "<br> Publish date: " + PublicationDate + "<br> " + DueDate;
 
         TextMeshProUGUI ScreenText = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         ScreenText.text = EndText;

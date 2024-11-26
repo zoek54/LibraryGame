@@ -16,6 +16,6 @@ MonoBehaviour:
   Author: Dave sad guy
   PublicationDate: 05-05-2004
   Publisher: The Polarbears
-  DueDate: 32-12-2024
+  DueDate: 'Due date: 32-12-2024'
   FrontCover: {fileID: 0}
   BackCover: {fileID: 0}
