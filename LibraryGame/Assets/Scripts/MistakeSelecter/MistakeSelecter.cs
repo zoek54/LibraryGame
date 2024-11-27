@@ -10,6 +10,13 @@ public class MistakeSelecter : MonoBehaviour
     [SerializeField] private Canvas canvas; // Verwijzing naar de Canvas (belangrijk voor de GraphicRaycaster)
     public GameObject Circle;
 
+    private BookCheckScript bookCheckScript;
+
+    private void Start()
+    {
+        bookCheckScript = GameObject.Find("BookChecker").GetComponent<BookCheckScript>();
+    }
+
     void Update()
     {
         DrawCircle();
@@ -40,6 +47,7 @@ public class MistakeSelecter : MonoBehaviour
                     {
                         GameObject SpawnendCircle = Instantiate(Circle, result.gameObject.transform);
                         SpawnendCircle.transform.position = result.gameObject.transform.position;
+                        bookCheckScript.CircledName = true;
                     }
                 }
                 else if (result.gameObject.name == "Author")//clicked Author
@@ -48,6 +56,7 @@ public class MistakeSelecter : MonoBehaviour
                     {
                         GameObject SpawnendCircle = Instantiate(Circle, result.gameObject.transform);
                         SpawnendCircle.transform.position = result.gameObject.transform.position;
+                        bookCheckScript.CircledAuthor = true;
                     }
                 }
                 else if (result.gameObject.name == "PublicationDate")//clicked publication date
@@ -56,6 +65,7 @@ public class MistakeSelecter : MonoBehaviour
                     {
                         GameObject SpawnendCircle = Instantiate(Circle, result.gameObject.transform);
                         SpawnendCircle.transform.position = result.gameObject.transform.position;
+                        bookCheckScript.CircledPublicationDate = true;
                     }
                 }
                 else if (result.gameObject.name == "Publisher")//clicked Publisher
@@ -64,6 +74,7 @@ public class MistakeSelecter : MonoBehaviour
                     {
                         GameObject SpawnendCircle = Instantiate(Circle, result.gameObject.transform);
                         SpawnendCircle.transform.position = result.gameObject.transform.position;
+                        bookCheckScript.CircledPublisher = true;
                     }
                 }
                 else if (result.gameObject.name == "Due date")//clicked due date
@@ -72,6 +83,7 @@ public class MistakeSelecter : MonoBehaviour
                     {
                         GameObject SpawnendCircle = Instantiate(Circle, result.gameObject.transform);
                         SpawnendCircle.transform.position = result.gameObject.transform.position;
+                        bookCheckScript.CircledDueDate = true;
                     }
                 }
             }
@@ -98,14 +110,15 @@ public class MistakeSelecter : MonoBehaviour
             {
                 if (result.gameObject.name == "Title")//clicked Title
                 {
+                    bookCheckScript.CircledName = false;
                     if (result.gameObject.transform.childCount != 0)
                     {
-                        Debug.Log(result.gameObject.transform.GetChild(0).name);
                         Destroy(result.gameObject.transform.GetChild(0).gameObject);
                     }
                 }
                 else if (result.gameObject.name == "Author")//clicked Author
                 {
+                    bookCheckScript.CircledAuthor = false;
                     if (result.gameObject.transform.childCount != 0)
                     {
                         Destroy(result.gameObject.transform.GetChild(0).gameObject);
@@ -113,6 +126,7 @@ public class MistakeSelecter : MonoBehaviour
                 }
                 else if (result.gameObject.name == "PublicationDate")//clicked publication date
                 {
+                    bookCheckScript.CircledPublicationDate = false;
                     if (result.gameObject.transform.childCount != 0)
                     {
                         Destroy(result.gameObject.transform.GetChild(0).gameObject);
@@ -120,6 +134,7 @@ public class MistakeSelecter : MonoBehaviour
                 }
                 else if (result.gameObject.name == "Publisher")//clicked Publisher
                 {
+                    bookCheckScript.CircledPublisher = false;
                     if (result.gameObject.transform.childCount != 0)
                     {
                         Destroy(result.gameObject.transform.GetChild(0).gameObject);
@@ -127,6 +142,7 @@ public class MistakeSelecter : MonoBehaviour
                 }
                 else if (result.gameObject.name == "Due date")//clicked due date
                 {
+                    bookCheckScript.CircledDueDate = false;
                     if (result.gameObject.transform.childCount != 0)
                     {
                         Destroy(result.gameObject.transform.GetChild(0).gameObject);
