@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class BookCheckScript : MonoBehaviour
 {
@@ -25,14 +26,31 @@ public class BookCheckScript : MonoBehaviour
     private bool PublicationDateIsFalse;
     private bool DueDateIsFalse;
 
+
+    [Header("Other Information")]
     public bool BookIsCorrect;
     public bool BookHasBeenChecked;
+    private GameObject Buttons;
+    private GameObject Book;
 
     private float HowManyAwnserFault;
     private float HowManyAwnserPlayer;
     private bool PlayerHasCorrectlyCircled;
 
+    public List<GameObject> AllCircles;
+
+    [Header("Refrences")]
+    private CreateBook createBook;
+
     //check elke diffrences of er een verschil is als er een verschil check of deze bool het zelfde is dan de gene die geselecteerd zijn met nog meer bools
+
+    private void Start()
+    {
+        Buttons = GameObject.Find("Buttons");
+        Book = GameObject.Find("Book");
+        Buttons.SetActive(false);
+        createBook = GameObject.Find("CreateBook").GetComponent<CreateBook>();
+    }
 
     private void Update()
     {
@@ -75,11 +93,13 @@ public class BookCheckScript : MonoBehaviour
             HowManyAwnserFault += 1;
         }
         BookHasBeenChecked = true;
+        Buttons.SetActive(true);
     }
 
     //check here if what player selected is indeed wrong;
     public void CheckWhatIsWrong()
     {
+        HowManyAwnserPlayer = 0;
         //Title
         if (CircledName && NameIsFalse)
         {
@@ -142,6 +162,7 @@ public class BookCheckScript : MonoBehaviour
                         {
                             GameObject SpawnendSound = Instantiate(CorrectAwnser);
                             StartCoroutine(DeleteSound(SpawnendSound, 2f));
+                            StartCoroutine(HideBook());
                             Debug.Log("Correct");
                         }
                         else
@@ -158,6 +179,7 @@ public class BookCheckScript : MonoBehaviour
                         {
                             GameObject SpawnendSound = Instantiate(CorrectAwnser);
                             StartCoroutine(DeleteSound(SpawnendSound, 2f));
+                            StartCoroutine(HideBook());
                             Debug.Log("Correct false");
                         }
                         else
@@ -182,5 +204,53 @@ public class BookCheckScript : MonoBehaviour
         Destroy(ObjectSound);
     }
 
+    public IEnumerator HideBook()
+    {
+        StartCoroutine(Book.GetComponent<BookAnimations>().RotateBookDown());
+
+        yield return new WaitForSeconds(3f);
+
+        Book.SetActive(false);
+        ResetBools();
+
+        //spawn new book
+        yield return new WaitForSeconds(3f);
+        Book.SetActive(true);
+        createBook.ChooseNewBook();
+
+        //play animation
+        StartCoroutine(Book.GetComponent<BookAnimations>().RotateBookUp());
+        StartCoroutine(Book.GetComponent<BookAnimations>().PickBookUp());
+    }
+
+    public void ResetBools()
+    {
+        CircledName = false;
+        CircledAuthor = false;
+        CircledPublisher = false;
+        CircledPublicationDate = false;
+        CircledDueDate = false;
+
+        NameIsFalse = false;
+        AuthorIsFalse = false;
+        PublisherIsFalse = false;
+        PublicationDateIsFalse = false;
+        DueDateIsFalse = false;
+
+        BookIsCorrect = false;
+        BookHasBeenChecked = false;
+        Buttons.SetActive(false);
+        PlayerHasCorrectlyCircled = false;
+
+        foreach(GameObject Circle in AllCircles)
+        {
+            Destroy(Circle);
+        }
+        AllCircles.Clear();
+
+        //reset screen text
+        TextMeshProUGUI ScreenText = GameObject.Find("ScreenText").GetComponent<TextMeshProUGUI>();
+        ScreenText.text = " Title: <br> Author: <br> Publisher: <br> Publish date: <br> Due date:";
+    }
     //volgende keer hier verder met het boek weer neerleggen en een nieuw boek maken daarbij alles resetten;
 }

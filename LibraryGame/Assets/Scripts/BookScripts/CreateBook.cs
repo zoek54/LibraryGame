@@ -45,11 +45,13 @@ public class CreateBook : MonoBehaviour
 
         if(RandomNumber <= 33)
         {
+            Debug.Log("Good Book");
             ScriptableBook TempBook = Books[Random.Range(0, Books.Count)];
             transferBookData.CorrectBook = TempBook;
 
             TemplateBook.Name = TempBook.Name;
             TemplateBook.Author = TempBook.Author;
+            Debug.Log(TemplateBook.Author);
             TemplateBook.Publisher = TempBook.Publisher;
             TemplateBook.PublicationDate = TempBook.PublicationDate;
             TemplateBook.DueDate = TempBook.DueDate;
@@ -79,22 +81,52 @@ public class CreateBook : MonoBehaviour
         if(RandomNumber < 20)
         {
             TemplateBook.Name = TitleScript.MakeTitleUp(TemplateBook.Name);
+
+            int RandomNumber2 = Random.Range(0, 100);
+            if(RandomNumber2 <= 45)
+            {
+                ChangeBook();
+            }
         }
         else if (RandomNumber >= 20 && RandomNumber < 40) //author
         {
             TemplateBook.Author = AuthorScript.MakeAuthorUp(TemplateBook.Author);
+
+            int RandomNumber2 = Random.Range(0, 100);
+            if (RandomNumber2 <= 45)
+            {
+                ChangeBook();
+            }
         }
         else if(RandomNumber >= 40 && RandomNumber < 60)
         {
             TemplateBook.Publisher = PublisherScript.MakePublisherUp(TemplateBook.Publisher);
+
+            int RandomNumber2 = Random.Range(0, 100);
+            if (RandomNumber2 <= 45)
+            {
+                ChangeBook();
+            }
         }
         else if (RandomNumber >= 60 && RandomNumber < 80)
         {
             TemplateBook.PublicationDate = PublishDateScript.MakePublicationDateUp(TemplateBook.PublicationDate);
+
+            int RandomNumber2 = Random.Range(0, 100);
+            if (RandomNumber2 <= 45)
+            {
+                ChangeBook();
+            }
         }
         else if (RandomNumber >= 80 && RandomNumber <= 100)
         {
             TemplateBook.DueDate = DueDateScript.MakeDueDateUp(TemplateBook.DueDate);
+
+            int RandomNumber2 = Random.Range(0, 100);
+            if (RandomNumber2 <= 45)
+            {
+                ChangeBook();
+            }
         }
     }
 }
