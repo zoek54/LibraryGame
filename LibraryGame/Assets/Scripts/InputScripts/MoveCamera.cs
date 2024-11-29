@@ -21,10 +21,6 @@ public class MoveCamera : MonoBehaviour
     private void Start()
     {
         bookAnimations = GameObject.Find("Book").GetComponent<BookAnimations>();
-
-        //start animation here
-        StartCoroutine(bookAnimations.PickBookUp());
-        StartCoroutine(bookAnimations.RotateBookUp());
     }
 
     private void Update()

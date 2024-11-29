@@ -32,6 +32,8 @@ public class BookCheckScript : MonoBehaviour
     public bool BookHasBeenChecked;
     private GameObject Buttons;
     private GameObject Book;
+    public List<GameObject> Charachters;
+    public GameObject AliveCharacter;
 
     private float HowManyAwnserFault;
     private float HowManyAwnserPlayer;
@@ -50,6 +52,16 @@ public class BookCheckScript : MonoBehaviour
         Book = GameObject.Find("Book");
         Buttons.SetActive(false);
         createBook = GameObject.Find("CreateBook").GetComponent<CreateBook>();
+
+        HideTheBookStart();
+        NewCharacter();
+    }
+
+    public void HideTheBookStart()
+    {
+        Book.GetComponent<MeshRenderer>().enabled = false;
+        Book.transform.GetChild(0).gameObject.SetActive(false);
+        Book.transform.GetChild(1).gameObject.SetActive(false);
     }
 
     private void Update()
@@ -208,14 +220,22 @@ public class BookCheckScript : MonoBehaviour
     {
         StartCoroutine(Book.GetComponent<BookAnimations>().RotateBookDown());
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
 
-        Book.SetActive(false);
+        //hide the book;
+        Book.GetComponent<MeshRenderer>().enabled = false;
+        Book.transform.GetChild(0).gameObject.SetActive(false);
+        Book.transform.GetChild(1).gameObject.SetActive(false);
         ResetBools();
+        StartCoroutine(AliveCharacter.GetComponent<MoveCharacter>().MoveToExit());
+    }
 
+    public void SpawnNewBook()
+    {
         //spawn new book
-        yield return new WaitForSeconds(3f);
-        Book.SetActive(true);
+        Book.GetComponent<MeshRenderer>().enabled = true;
+        Book.transform.GetChild(0).gameObject.SetActive(true);
+        Book.transform.GetChild(1).gameObject.SetActive(true);
         createBook.ChooseNewBook();
 
         //play animation
@@ -253,4 +273,10 @@ public class BookCheckScript : MonoBehaviour
         ScreenText.text = " Title: <br> Author: <br> Publisher: <br> Publish date: <br> Due date:";
     }
     //volgende keer hier verder met het boek weer neerleggen en een nieuw boek maken daarbij alles resetten;
+
+    public void NewCharacter()
+    {
+        GameObject SpawnendCharacter = Instantiate(Charachters[Random.Range(0, Charachters.Count)]);
+        SpawnendCharacter.transform.position = new Vector3(-4.26f, 0, -3.7f);
+    }
 }

@@ -27,8 +27,6 @@ public class CreateBook : MonoBehaviour
         AuthorScript = GameObject.Find("RandomAuthor").GetComponent<RandomAuthorScript>();
         transferBookData = GameObject.Find("Book").GetComponent<TransferBookData>();
         bookInformationContainer = GameObject.Find("BookInformationContainer").GetComponent<BookInformationContainer>();
-
-        ChooseNewBook();
     }
 
     private void Update()

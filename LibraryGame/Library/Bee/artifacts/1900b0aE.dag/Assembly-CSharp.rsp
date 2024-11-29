@@ -348,6 +348,7 @@
 "Assets/Scripts/BookScripts/BookInformationContainer.cs"
 "Assets/Scripts/BookScripts/CreateBook.cs"
 "Assets/Scripts/BookScripts/TransferBookData.cs"
+"Assets/Scripts/Character/MoveCharacter.cs"
 "Assets/Scripts/CheckingScripts/BookCheckScript.cs"
 "Assets/Scripts/InputScripts/MoveCamera.cs"
 "Assets/Scripts/InputScripts/RotateBookScript.cs"

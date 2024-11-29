@@ -472,6 +472,11 @@ MonoBehaviour:
   CircledDueDate: 0
   BookIsCorrect: 0
   BookHasBeenChecked: 0
+  Charachters:
+  - {fileID: 4978106520168342167, guid: e96555d0b516f4f4fa8006bee1017eee, type: 3}
+  - {fileID: 7673082802922251193, guid: 668cd21dfe1dcc549b1f3c6e8b64154e, type: 3}
+  - {fileID: 8549527825995377174, guid: 4514369ab788ac646b4597177445466f, type: 3}
+  AliveCharacter: {fileID: 0}
   AllCircles: []
 --- !u!1001 &275417091
 PrefabInstance:
