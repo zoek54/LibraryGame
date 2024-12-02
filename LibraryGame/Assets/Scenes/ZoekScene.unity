@@ -465,6 +465,8 @@ MonoBehaviour:
   CurrentBook: {fileID: 0}
   WrongAwnser: {fileID: 7332750383635046746, guid: 0cc0cde3a339a4e44927b43e6073dfa5, type: 3}
   CorrectAwnser: {fileID: 8085933759174954397, guid: 03ac7dca6a3091040ad65b531d254af1, type: 3}
+  BookDrop: {fileID: 4538984207477368326, guid: f0473b196b4540e49b236338ab61d869, type: 3}
+  BookPickUp: {fileID: 6354405050966756212, guid: 8f5703bcc0b5db84990bc9cf0b4a3283, type: 3}
   CircledName: 0
   CircledAuthor: 0
   CircledPublisher: 0

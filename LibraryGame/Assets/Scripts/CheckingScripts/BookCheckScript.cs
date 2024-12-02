@@ -11,6 +11,8 @@ public class BookCheckScript : MonoBehaviour
     [Header("Sounds")]
     public GameObject WrongAwnser;
     public GameObject CorrectAwnser;
+    public GameObject BookDrop;
+    public GameObject BookPickUp;
 
     [Header("Bools for circled on book")]
     public bool CircledName;
@@ -238,9 +240,11 @@ public class BookCheckScript : MonoBehaviour
         Book.transform.GetChild(1).gameObject.SetActive(true);
         createBook.ChooseNewBook();
 
-        //play animation
-        StartCoroutine(Book.GetComponent<BookAnimations>().RotateBookUp());
-        StartCoroutine(Book.GetComponent<BookAnimations>().PickBookUp());
+        //sounds
+        GameObject SpawendBookDrop = Instantiate(BookDrop);
+        DeleteSound(SpawendBookDrop , 3f);
+
+        StartCoroutine(PickUpBook());
     }
 
     public void ResetBools()
@@ -278,5 +282,16 @@ public class BookCheckScript : MonoBehaviour
     {
         GameObject SpawnendCharacter = Instantiate(Charachters[Random.Range(0, Charachters.Count)]);
         SpawnendCharacter.transform.position = new Vector3(-4.26f, 0, -3.7f);
+    }
+
+    public IEnumerator PickUpBook()
+    {
+        yield return new WaitForSeconds(0.5f);
+        GameObject SpawnendBookPickUp = Instantiate(BookPickUp);
+        DeleteSound(SpawnendBookPickUp, 3f);
+
+        //play animation
+        StartCoroutine(Book.GetComponent<BookAnimations>().RotateBookUp());
+        StartCoroutine(Book.GetComponent<BookAnimations>().PickBookUp());
     }
 }
