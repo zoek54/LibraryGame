@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class MistakeSelecter : MonoBehaviour
 {
-    [SerializeField] private Canvas canvas; // Verwijzing naar de Canvas (belangrijk voor de GraphicRaycaster)
+    public Canvas canvas; // Verwijzing naar de Canvas (belangrijk voor de GraphicRaycaster)
     public GameObject Circle;
 
     private BookCheckScript bookCheckScript;
@@ -19,8 +19,11 @@ public class MistakeSelecter : MonoBehaviour
 
     void Update()
     {
-        DrawCircle();
-        RemoveCircle();
+        if (canvas)
+        {
+            DrawCircle();
+            RemoveCircle();
+        }
     }
 
     public void DrawCircle()

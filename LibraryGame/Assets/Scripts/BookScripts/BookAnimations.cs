@@ -26,6 +26,7 @@ public class BookAnimations : MonoBehaviour
 
     public IEnumerator PickBookUp()
     {
+        StartCoroutine(RotateBookUp());
         MovingSpeed = 0.8f;
         EndPos = gameObject.transform.position;
         EndPos = new Vector3(EndPos.x, EndPos.y + 0.8f, EndPos.z);
@@ -53,7 +54,7 @@ public class BookAnimations : MonoBehaviour
 
     public IEnumerator LayDownBook()
     {
-        MovingSpeed = 0.5f;
+        MovingSpeed = 1f;
         while (Vector3.Distance(gameObject.transform.position, OriginalPos) > 0.01f)
         {
             gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, OriginalPos, MovingSpeed * Time.deltaTime);
@@ -81,5 +82,15 @@ public class BookAnimations : MonoBehaviour
         }
 
         moveCamera.IsPlayingAnimation = false;
+    }
+
+    public IEnumerator MoveToPlayer(Vector3 Location)
+    {
+        float MovementSpeed = 4;
+        while (Vector3.Distance(gameObject.transform.position, Location) > 0.1f)
+        {
+            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, Location, MovementSpeed * Time.deltaTime);
+            yield return null;
+        }
     }
 }

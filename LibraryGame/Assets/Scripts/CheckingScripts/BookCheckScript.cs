@@ -33,7 +33,8 @@ public class BookCheckScript : MonoBehaviour
     public bool BookIsCorrect;
     public bool BookHasBeenChecked;
     private GameObject Buttons;
-    private GameObject Book;
+    public GameObject Book;
+    public GameObject LibraryCard;
     public List<GameObject> Charachters;
     public GameObject AliveCharacter;
 
@@ -45,25 +46,18 @@ public class BookCheckScript : MonoBehaviour
 
     [Header("Refrences")]
     private CreateBook createBook;
+    private BookStateHandler bookStateHandler;
 
     //check elke diffrences of er een verschil is als er een verschil check of deze bool het zelfde is dan de gene die geselecteerd zijn met nog meer bools
 
     private void Start()
     {
         Buttons = GameObject.Find("Buttons");
-        Book = GameObject.Find("Book");
         Buttons.SetActive(false);
         createBook = GameObject.Find("CreateBook").GetComponent<CreateBook>();
+        bookStateHandler = GameObject.Find("BookStateHandler").GetComponent<BookStateHandler>();
 
-        HideTheBookStart();
         NewCharacter();
-    }
-
-    public void HideTheBookStart()
-    {
-        Book.GetComponent<MeshRenderer>().enabled = false;
-        Book.transform.GetChild(0).gameObject.SetActive(false);
-        Book.transform.GetChild(1).gameObject.SetActive(false);
     }
 
     private void Update()
@@ -225,9 +219,8 @@ public class BookCheckScript : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         //hide the book;
-        Book.GetComponent<MeshRenderer>().enabled = false;
-        Book.transform.GetChild(0).gameObject.SetActive(false);
-        Book.transform.GetChild(1).gameObject.SetActive(false);
+        Destroy(Book);
+        Destroy(LibraryCard);
         ResetBools();
         StartCoroutine(AliveCharacter.GetComponent<MoveCharacter>().MoveToExit());
     }
@@ -235,16 +228,11 @@ public class BookCheckScript : MonoBehaviour
     public void SpawnNewBook()
     {
         //spawn new book
-        Book.GetComponent<MeshRenderer>().enabled = true;
-        Book.transform.GetChild(0).gameObject.SetActive(true);
-        Book.transform.GetChild(1).gameObject.SetActive(true);
         createBook.ChooseNewBook();
 
         //sounds
         GameObject SpawendBookDrop = Instantiate(BookDrop);
         DeleteSound(SpawendBookDrop , 3f);
-
-        StartCoroutine(PickUpBook());
     }
 
     public void ResetBools()
@@ -265,6 +253,7 @@ public class BookCheckScript : MonoBehaviour
         BookHasBeenChecked = false;
         Buttons.SetActive(false);
         PlayerHasCorrectlyCircled = false;
+        bookStateHandler.BookIsLayingDown = true;
 
         foreach(GameObject Circle in AllCircles)
         {
@@ -281,17 +270,16 @@ public class BookCheckScript : MonoBehaviour
     public void NewCharacter()
     {
         GameObject SpawnendCharacter = Instantiate(Charachters[Random.Range(0, Charachters.Count)]);
-        SpawnendCharacter.transform.position = new Vector3(-4.26f, 0, -3.7f);
+        SpawnendCharacter.transform.position = new Vector3(2.44f, 0, -4.53f);
     }
 
     public IEnumerator PickUpBook()
     {
-        yield return new WaitForSeconds(0.5f);
         GameObject SpawnendBookPickUp = Instantiate(BookPickUp);
         DeleteSound(SpawnendBookPickUp, 3f);
+        yield return new WaitForSeconds(0.1f);
 
         //play animation
-        StartCoroutine(Book.GetComponent<BookAnimations>().RotateBookUp());
         StartCoroutine(Book.GetComponent<BookAnimations>().PickBookUp());
     }
 }

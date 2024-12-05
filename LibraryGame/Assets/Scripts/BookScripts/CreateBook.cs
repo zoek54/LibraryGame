@@ -15,8 +15,15 @@ public class CreateBook : MonoBehaviour
     private RandomPublisherScript PublisherScript;
     private RandomDueDateScript DueDateScript;
     private RandomAuthorScript AuthorScript;
-    private TransferBookData transferBookData;
+    public TransferBookData transferBookData;
     private BookInformationContainer bookInformationContainer;
+
+    [Header("BoolChecking")]
+    private bool TitleIsChanged;
+    private bool AuthorIsChanged;
+    private bool PublisherIsChanged;
+    private bool PublishDateIsChanged;
+    private bool DueDateIsChanged;
 
     private void Start()
     {
@@ -25,7 +32,6 @@ public class CreateBook : MonoBehaviour
         PublisherScript = GameObject.Find("RandomPublisher").GetComponent<RandomPublisherScript>();
         DueDateScript = GameObject.Find("RandomDueDate").GetComponent<RandomDueDateScript>();
         AuthorScript = GameObject.Find("RandomAuthor").GetComponent<RandomAuthorScript>();
-        transferBookData = GameObject.Find("Book").GetComponent<TransferBookData>();
         bookInformationContainer = GameObject.Find("BookInformationContainer").GetComponent<BookInformationContainer>();
     }
 
@@ -54,7 +60,7 @@ public class CreateBook : MonoBehaviour
             TemplateBook.PublicationDate = TempBook.PublicationDate;
             TemplateBook.DueDate = TempBook.DueDate;
 
-            GameObject.Find("Book").GetComponent<TransferBookData>().SwitchBooks(TemplateBook);
+            transferBookData.SwitchBooks(TemplateBook);
         }
         else if (RandomNumber > 33)
         {
@@ -68,63 +74,148 @@ public class CreateBook : MonoBehaviour
             TemplateBook.DueDate = TempBook.DueDate;
 
             ChangeBook();
+            ResetBools();
 
-            GameObject.Find("Book").GetComponent<TransferBookData>().SwitchBooks(TemplateBook);
+            transferBookData.SwitchBooks(TemplateBook);
         }
     }
 
     public void ChangeBook()
     {
         int RandomNumber = Random.Range(0, 100);
-        if(RandomNumber < 20)
+        if (RandomNumber < 20)
         {
-            TemplateBook.Name = TitleScript.MakeTitleUp(TemplateBook.Name);
-
-            int RandomNumber2 = Random.Range(0, 100);
-            if(RandomNumber2 <= 45)
+            if (!TitleIsChanged)
             {
-                ChangeBook();
+                TemplateBook.Name = TitleScript.MakeTitleUp(TemplateBook.Name);
+
+                TitleIsChanged = true;
+                int RandomNumber2 = Random.Range(0, 100);
+                if (RandomNumber2 <= 45)
+                {
+                    ChangeBook();
+                }
+                else
+                {
+                    ResetBools();
+                }
+            }
+            else
+            {
+                if (!TitleIsChanged || !AuthorIsChanged || !PublisherIsChanged || !PublishDateIsChanged || !DueDateIsChanged)
+                {
+                    ChangeBook();
+                }
             }
         }
         else if (RandomNumber >= 20 && RandomNumber < 40) //author
         {
-            TemplateBook.Author = AuthorScript.MakeAuthorUp(TemplateBook.Author);
-
-            int RandomNumber2 = Random.Range(0, 100);
-            if (RandomNumber2 <= 45)
+            if (!AuthorIsChanged)
             {
-                ChangeBook();
+                TemplateBook.Author = AuthorScript.MakeAuthorUp(TemplateBook.Author);
+
+                AuthorIsChanged = true;
+                int RandomNumber2 = Random.Range(0, 100);
+                if (RandomNumber2 <= 45)
+                {
+                    ChangeBook();
+                }
+                else
+                {
+                    ResetBools();
+                }
+            }
+            else
+            {
+                if (!TitleIsChanged || !AuthorIsChanged || !PublisherIsChanged || !PublishDateIsChanged || !DueDateIsChanged)
+                {
+                    ChangeBook();
+                }
             }
         }
-        else if(RandomNumber >= 40 && RandomNumber < 60)
+        else if (RandomNumber >= 40 && RandomNumber < 60)
         {
-            TemplateBook.Publisher = PublisherScript.MakePublisherUp(TemplateBook.Publisher);
-
-            int RandomNumber2 = Random.Range(0, 100);
-            if (RandomNumber2 <= 45)
+            if (!PublisherIsChanged)
             {
-                ChangeBook();
+                TemplateBook.Publisher = PublisherScript.MakePublisherUp(TemplateBook.Publisher);
+
+                PublisherIsChanged = true;
+                int RandomNumber2 = Random.Range(0, 100);
+                if (RandomNumber2 <= 45)
+                {
+                    ChangeBook();
+                }
+                else
+                {
+                    ResetBools();
+                }
+            }
+            else
+            {
+                if (!TitleIsChanged || !AuthorIsChanged || !PublisherIsChanged || !PublishDateIsChanged || !DueDateIsChanged)
+                {
+                    ChangeBook();
+                }
             }
         }
         else if (RandomNumber >= 60 && RandomNumber < 80)
         {
-            TemplateBook.PublicationDate = PublishDateScript.MakePublicationDateUp(TemplateBook.PublicationDate);
-
-            int RandomNumber2 = Random.Range(0, 100);
-            if (RandomNumber2 <= 45)
+            if (!PublishDateIsChanged)
             {
-                ChangeBook();
+                TemplateBook.PublicationDate = PublishDateScript.MakePublicationDateUp(TemplateBook.PublicationDate);
+
+                PublishDateIsChanged = true;
+                int RandomNumber2 = Random.Range(0, 100);
+                if (RandomNumber2 <= 45)
+                {
+                    ChangeBook();
+                }
+                else
+                {
+                    ResetBools();
+                }
+            }
+            else
+            {
+                if (!TitleIsChanged || !AuthorIsChanged || !PublisherIsChanged || !PublishDateIsChanged || !DueDateIsChanged)
+                {
+                    ChangeBook();
+                }
             }
         }
         else if (RandomNumber >= 80 && RandomNumber <= 100)
         {
-            TemplateBook.DueDate = DueDateScript.MakeDueDateUp(TemplateBook.DueDate);
-
-            int RandomNumber2 = Random.Range(0, 100);
-            if (RandomNumber2 <= 45)
+            if (!DueDateIsChanged)
             {
-                ChangeBook();
+                TemplateBook.DueDate = DueDateScript.MakeDueDateUp(TemplateBook.DueDate);
+
+                DueDateIsChanged = true;
+                int RandomNumber2 = Random.Range(0, 100);
+                if (RandomNumber2 <= 45)
+                {
+                    ChangeBook();
+                }
+                else
+                {
+                    ResetBools();
+                }
+            }
+            else
+            {
+                if (!TitleIsChanged || !AuthorIsChanged || !PublisherIsChanged || !PublishDateIsChanged || !DueDateIsChanged)
+                {
+                    ChangeBook();
+                }
             }
         }
+    }
+
+    public void ResetBools()
+    {
+        TitleIsChanged = false;
+        AuthorIsChanged = false;
+        PublisherIsChanged = false;
+        PublishDateIsChanged = false;
+        DueDateIsChanged = false;
     }
 }

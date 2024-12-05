@@ -12,21 +12,22 @@ public class RotateBookScript : MonoBehaviour
 
     [Header("Script logic")]
     private Vector3 FirstMousePos;
-    private GameObject Book;
+    public GameObject Book;
     private bool MouseButtonIsDown;
 
     [Header("Refrences")]
     private ScannerScript scannerScript;
+    private BookStateHandler bookStateHandler;
 
     private void Start()
     {
-        Book = GameObject.Find("Book").gameObject;
         scannerScript = GameObject.Find("Scanner").GetComponent<ScannerScript>();
+        bookStateHandler = GameObject.Find("BookStateHandler").GetComponent<BookStateHandler>();
     }
 
     private void Update()
     {
-        if (WantToRotate)
+        if (WantToRotate && !bookStateHandler.BookIsLayingDown)
         {
             SetMousePos();
             RotateBook();

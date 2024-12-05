@@ -16,11 +16,11 @@ public class MoveCamera : MonoBehaviour
     private float PosNumber = 3;
 
     //other scripts;
-    private BookAnimations bookAnimations;
+    public BookAnimations bookAnimations;
 
     private void Start()
     {
-        bookAnimations = GameObject.Find("Book").GetComponent<BookAnimations>();
+        //bookAnimations = GameObject.Find("Book").GetComponent<BookAnimations>();
     }
 
     private void Update()
