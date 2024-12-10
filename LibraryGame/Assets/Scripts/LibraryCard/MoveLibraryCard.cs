@@ -10,15 +10,19 @@ public class MoveLibraryCard : MonoBehaviour
     private float MovingSpeed;
     private float RotationSpeed;
 
+    public bool CardIsBeingInspected;
+
     private void Start()
     {
         GameObject.Find("BookChecker").GetComponent<BookCheckScript>().LibraryCard = gameObject;
+        GameObject.Find("CameraMover").GetComponent<MoveCamera>().moveLibraryCard = gameObject.GetComponent<MoveLibraryCard>();
     }
 
     public IEnumerator MoveToPlayer()
     {
         MovingSpeed = 4f;
         RotationSpeed = 400;
+        CardIsBeingInspected = true;
 
         StartCoroutine(IncreaseScale());
 
@@ -85,6 +89,8 @@ public class MoveLibraryCard : MonoBehaviour
             gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, NextLocation, MovingSpeed * Time.deltaTime);
             yield return null;
         }
+
+        CardIsBeingInspected = false;
     }
 
     public IEnumerator DecreaseScale()

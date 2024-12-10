@@ -214,7 +214,7 @@ public class BookCheckScript : MonoBehaviour
 
     public IEnumerator HideBook()
     {
-        StartCoroutine(Book.GetComponent<BookAnimations>().RotateBookDown());
+        StartCoroutine(Book.GetComponent<BookAnimations>().RotateBookDown(true));
 
         yield return new WaitForSeconds(2f);
 
