@@ -13,7 +13,7 @@ public class MoveCamera : MonoBehaviour
     public float ScrollingSpeed;
     public bool IsScrolling;
     public bool IsPlayingAnimation;
-    private float PosNumber = 3;
+    public float PosNumber = 3;
 
     //other scripts;
     public BookAnimations bookAnimations;
@@ -73,8 +73,11 @@ public class MoveCamera : MonoBehaviour
                 PosNumber -= 1;
 
                 //play the laydownthebookhere
+                if (moveLibraryCard.CardIsBeingInspected)
+                {
+                    StartCoroutine(moveLibraryCard.MoveBack());
+                }
                 StartCoroutine(bookAnimations.RotateBookDown(false));
-                StartCoroutine(moveLibraryCard.MoveBack());
 
                 IsPlayingAnimation = true;
             }

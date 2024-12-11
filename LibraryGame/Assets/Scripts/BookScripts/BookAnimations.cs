@@ -110,7 +110,6 @@ public class BookAnimations : MonoBehaviour
 
     public IEnumerator MoveToNpc()
     {
-        Debug.Log("1111");
         float MovementSpeed = 1;
         while (Vector3.Distance(gameObject.transform.position, new Vector3(2.56f, 1.15f, -0.31f)) > 0.01f)
         {

@@ -8,13 +8,16 @@ public class BookStateHandler : MonoBehaviour
     private bool IsSwiping;
     private Vector3 StartMousePos;
     private Vector3 EndMousePos;
+    private bool IsFollowingMouse;
+    private GameObject Book;
 
     private BookCheckScript bookCheckScript;
     private BookAnimations bookAnimations;
-
+    private MoveCamera moveCamera;
     private void Start()
     {
         bookCheckScript = GameObject.Find("BookChecker").GetComponent<BookCheckScript>();
+        moveCamera = GameObject.Find("CameraMover").GetComponent<MoveCamera>();
 
         BookIsLayingDown = true;
     }
@@ -23,6 +26,7 @@ public class BookStateHandler : MonoBehaviour
     {
         PickUpBook();
         PutBookDown();
+        FollowMouse();
     }
 
     public void PickUpBook()
@@ -31,16 +35,25 @@ public class BookStateHandler : MonoBehaviour
         {
             if (BookIsLayingDown)
             {
+                
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
 
 
                 if (Physics.Raycast(ray, out hit))
                 {
-                    if (hit.transform.gameObject.GetComponent<BookAnimations>())
+                    if (moveCamera.PosNumber == 3) //to get the book inspected;
                     {
-                        BookIsLayingDown = false;
-                        StartCoroutine(bookCheckScript.PickUpBook());
+                        if (hit.transform.gameObject.GetComponent<BookAnimations>())
+                        {
+                            BookIsLayingDown = false;
+                            StartCoroutine(bookCheckScript.PickUpBook());
+                        }
+                    }
+                    else//to move the book
+                    {
+                        Book = GameObject.Find("Book(Clone)");
+                        IsFollowingMouse = true;
                     }
                 }
             }
@@ -89,6 +102,21 @@ public class BookStateHandler : MonoBehaviour
                 }   
             }
             IsSwiping = false;
+        }
+    }
+
+    //hier mee bezig
+    public void FollowMouse()
+    {
+        if (IsFollowingMouse)
+        {
+            Debug.Log(Input.mousePosition);
+            Vector3 mousePosition = new Vector3(0,0,0);
+            mousePosition.z = mousePosition.z += 3;
+            //mousePosition.y = mousePosition.x;
+            mousePosition.x = Input.mousePosition.y;
+            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+            Book.transform.position = worldPosition;
         }
     }
 }
