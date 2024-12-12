@@ -110,19 +110,10 @@ public class BookStateHandler : MonoBehaviour
     {
         if (IsFollowingMouse)
         {
-            // Haal de muispositie in schermcoördinaten
             Vector3 mousePosition = Input.mousePosition;
-
-            // Zet de z-waarde op de afstand tussen de camera en het object
             mousePosition.z = Vector3.Distance(Camera.main.transform.position, Book.transform.position);
-
-            // Converteer naar wereldcoördinaten
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-
-            // Verander de x-positie van het object op basis van de verticale muisbeweging (worldPosition.y)
-            Book.transform.position = new Vector3(-worldPosition.y, Book.transform.position.y, Book.transform.position.z);
-
-            // Debug de nieuwe positie van het object
+            Book.transform.position = new Vector3(-worldPosition.y, Book.transform.position.y, worldPosition.z);
             Debug.Log($"New Book Position: {Book.transform.position}");
         }
     }
