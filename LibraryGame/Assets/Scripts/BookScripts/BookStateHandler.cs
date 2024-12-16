@@ -14,10 +14,12 @@ public class BookStateHandler : MonoBehaviour
     private BookCheckScript bookCheckScript;
     private BookAnimations bookAnimations;
     private MoveCamera moveCamera;
+    private BookCarHandler bookCarHandler;
     private void Start()
     {
         bookCheckScript = GameObject.Find("BookChecker").GetComponent<BookCheckScript>();
         moveCamera = GameObject.Find("CameraMover").GetComponent<MoveCamera>();
+        bookCarHandler = GameObject.Find("BookCar").GetComponent<BookCarHandler>();
 
         BookIsLayingDown = true;
     }
@@ -52,7 +54,7 @@ public class BookStateHandler : MonoBehaviour
                     {
                         if (WantsToMoveTheBook)
                         {
-                            MoveBookToCar();
+                            StartCoroutine(MoveBookToCar());
                             WantsToMoveTheBook = false;
                         }
                     }
@@ -73,7 +75,7 @@ public class BookStateHandler : MonoBehaviour
                     {
                         if (hit.transform.gameObject.GetComponent<BookAnimations>())
                         {
-                            Book = GameObject.Find("Book(Clone)");
+                            Book = hit.transform.gameObject;
                             WantsToMoveTheBook = true;
                         }
                         else
@@ -132,8 +134,38 @@ public class BookStateHandler : MonoBehaviour
         }
     }
 
-    public void MoveBookToCar()
+    public IEnumerator MoveBookToCar()
     {
-        
+        float Speed = 2f;
+
+        while (Vector3.Distance(Book.transform.position, new Vector3(4.9f, 1f, -0.25f)) > 0.1f)
+        {
+            Book.transform.position = Vector3.MoveTowards(Book.transform.position, new Vector3(4.9f, 1f, -0.25f), Speed * Time.deltaTime);
+            yield return null;
+        }
+
+        Vector3 ChosenSpot = bookCarHandler.ChooseNewSpot();
+
+        StartCoroutine(RotateBook());
+        while (Vector3.Distance(Book.transform.position, ChosenSpot) > 0.1f)
+        {
+            Book.transform.position = Vector3.MoveTowards(Book.transform.position, ChosenSpot, Speed * Time.deltaTime);
+            yield return null;
+        }
+
+        bookCarHandler.BooksOnCar.Add(Book);
+        StartCoroutine(bookCheckScript.HideBook());
+    }
+
+    public IEnumerator RotateBook()
+    {
+        //rotating
+        float Speed = 90f;
+
+        while (Vector3.Distance(Book.transform.localEulerAngles, new Vector3(Book.transform.localEulerAngles.x, bookCarHandler.RotateAmount, Book.transform.localEulerAngles.z)) > 1f)
+        {
+            Book.transform.localEulerAngles = Vector3.MoveTowards(Book.transform.localEulerAngles, new Vector3(Book.transform.localEulerAngles.x, bookCarHandler.RotateAmount, Book.transform.localEulerAngles.z), Speed * Time.deltaTime);
+            yield return null;
+        }
     }
 }

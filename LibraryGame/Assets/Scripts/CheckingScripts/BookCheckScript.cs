@@ -214,12 +214,13 @@ public class BookCheckScript : MonoBehaviour
 
     public IEnumerator HideBook()
     {
-        StartCoroutine(Book.GetComponent<BookAnimations>().RotateBookDown(true));
-
         yield return new WaitForSeconds(2f);
 
         //hide the book;
-        Destroy(Book);
+        Destroy(Book.GetComponent<TransferBookData>());
+        Destroy(Book.GetComponent<BookInformation>());
+        Destroy(Book.GetComponent<BookAnimations>());
+        Destroy(Book.GetComponent<BoxCollider>());
         Destroy(LibraryCard);
         ResetBools();
         StartCoroutine(AliveCharacter.GetComponent<MoveCharacter>().MoveToExit());
