@@ -8,8 +8,8 @@ public class BookStateHandler : MonoBehaviour
     private bool IsSwiping;
     private Vector3 StartMousePos;
     private Vector3 EndMousePos;
-    private bool IsFollowingMouse;
     private GameObject Book;
+    public bool WantsToMoveTheBook;
 
     private BookCheckScript bookCheckScript;
     private BookAnimations bookAnimations;
@@ -26,7 +26,6 @@ public class BookStateHandler : MonoBehaviour
     {
         PickUpBook();
         PutBookDown();
-        FollowMouse();
     }
 
     public void PickUpBook()
@@ -35,10 +34,8 @@ public class BookStateHandler : MonoBehaviour
         {
             if (BookIsLayingDown)
             {
-                
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
-
 
                 if (Physics.Raycast(ray, out hit))
                 {
@@ -46,14 +43,47 @@ public class BookStateHandler : MonoBehaviour
                     {
                         if (hit.transform.gameObject.GetComponent<BookAnimations>())
                         {
+                            moveCamera.IsPlayingAnimation = true;
                             BookIsLayingDown = false;
                             StartCoroutine(bookCheckScript.PickUpBook());
                         }
                     }
-                    else//to move the book
+                    if (hit.transform.gameObject.tag == "BookCar")
                     {
-                        Book = GameObject.Find("Book(Clone)");
-                        IsFollowingMouse = true;
+                        if (WantsToMoveTheBook)
+                        {
+                            MoveBookToCar();
+                            WantsToMoveTheBook = false;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (BookIsLayingDown)
+                {
+                    if (moveCamera.PosNumber != 3)
+                    {
+                        if (hit.transform.gameObject.GetComponent<BookAnimations>())
+                        {
+                            Book = GameObject.Find("Book(Clone)");
+                            WantsToMoveTheBook = true;
+                        }
+                        else
+                        {
+                            WantsToMoveTheBook = false;
+                        }
+                    }
+                    else
+                    {
+                        WantsToMoveTheBook = false;
                     }
                 }
             }
@@ -70,7 +100,6 @@ public class BookStateHandler : MonoBehaviour
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
-
 
                 if (Physics.Raycast(ray, out hit))
                 {
@@ -97,24 +126,14 @@ public class BookStateHandler : MonoBehaviour
                     {
                         StartCoroutine(bookAnimations.RotateBookDown(false));
                     }
-                    Debug.Log(StartMousePos);
-                    Debug.Log(EndMousePos);
                 }   
             }
             IsSwiping = false;
         }
     }
 
-    //hier mee bezig
-    public void FollowMouse()
+    public void MoveBookToCar()
     {
-        if (IsFollowingMouse)
-        {
-            Vector3 mousePosition = Input.mousePosition;
-            mousePosition.z = Vector3.Distance(Camera.main.transform.position, Book.transform.position);
-            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-            Book.transform.position = new Vector3(-worldPosition.y, Book.transform.position.y, worldPosition.z);
-            Debug.Log($"New Book Position: {Book.transform.position}");
-        }
+        
     }
 }

@@ -8,6 +8,7 @@ TagManager:
   - QrCode
   - GoodButton
   - WrongButton
+  - BookCar
   layers:
   - Default
   - TransparentFX

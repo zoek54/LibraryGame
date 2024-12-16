@@ -32,7 +32,6 @@ public class MoveCamera : MonoBehaviour
             {
                 if(PosNumber != 3)
                 {
-                    Debug.Log("ddeed");
                     CheckWhatLocation(1);
                     IsScrolling = true;
                 }
