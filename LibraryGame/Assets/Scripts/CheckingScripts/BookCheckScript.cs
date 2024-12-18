@@ -166,19 +166,7 @@ public class BookCheckScript : MonoBehaviour
                 {
                     if (hit.transform.gameObject.tag == "GoodButton")
                     {
-                        if (BookIsCorrect)
-                        {
-                            GameObject SpawnendSound = Instantiate(CorrectAwnser);
-                            StartCoroutine(DeleteSound(SpawnendSound, 2f));
-                            StartCoroutine(HideBook());
-                            Debug.Log("Correct");
-                        }
-                        else
-                        {
-                            GameObject SpawnendSound = Instantiate(WrongAwnser);
-                            StartCoroutine(DeleteSound(SpawnendSound, 2f));
-                            Debug.Log("Not correct");
-                        }
+                        
                     }
                     else if (hit.transform.gameObject.tag == "WrongButton")
                     {
@@ -203,6 +191,24 @@ public class BookCheckScript : MonoBehaviour
                     Debug.Log("Book has not been checked yet");
                 }
             }
+        }
+    }
+
+
+    public void PlayerThinkBookIsGood()
+    {
+        if (BookIsCorrect)
+        {
+            GameObject SpawnendSound = Instantiate(CorrectAwnser);
+            StartCoroutine(DeleteSound(SpawnendSound, 2f));
+            StartCoroutine(HideBook());
+            Debug.Log("Correct");
+        }
+        else
+        {
+            GameObject SpawnendSound = Instantiate(WrongAwnser);
+            StartCoroutine(DeleteSound(SpawnendSound, 2f));
+            Debug.Log("Not correct");
         }
     }
 
@@ -233,7 +239,7 @@ public class BookCheckScript : MonoBehaviour
 
         //sounds
         GameObject SpawendBookDrop = Instantiate(BookDrop);
-        DeleteSound(SpawendBookDrop , 3f);
+        StartCoroutine(DeleteSound(SpawendBookDrop , 3f));
     }
 
     public void ResetBools()
@@ -277,7 +283,7 @@ public class BookCheckScript : MonoBehaviour
     public IEnumerator PickUpBook()
     {
         GameObject SpawnendBookPickUp = Instantiate(BookPickUp);
-        DeleteSound(SpawnendBookPickUp, 3f);
+        StartCoroutine(DeleteSound(SpawnendBookPickUp, 3f));
         yield return new WaitForSeconds(0.1f);
 
         //play animation

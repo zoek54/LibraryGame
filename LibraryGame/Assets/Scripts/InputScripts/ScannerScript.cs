@@ -14,6 +14,7 @@ public class ScannerScript : MonoBehaviour
         {
             RedLight.SetActive(false);
             IsFollowingMouse = false;
+            gameObject.GetComponent<Rigidbody>().useGravity = true;
         }
 
         PickUpScanner();
@@ -33,6 +34,7 @@ public class ScannerScript : MonoBehaviour
                 {
                     RedLight.SetActive(true);
                     IsFollowingMouse = true;
+                    gameObject.GetComponent<Rigidbody>().useGravity = false;
                 }
             }
         }

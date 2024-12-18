@@ -366,6 +366,7 @@
 "Assets/Scripts/RandomBookInformation/RandomTitleScript.cs"
 "Assets/Scripts/ScreenScripts/ScreenInformation.cs"
 "Assets/Scripts/ScriptableObjects/ScriptableBook.cs"
+"Assets/Scripts/Stamp/StampHandler.cs"
 -langversion:9.0
 /deterministic
 /optimize+

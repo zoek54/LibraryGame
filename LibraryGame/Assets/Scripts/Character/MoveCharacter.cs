@@ -44,33 +44,6 @@ public class MoveCharacter : MonoBehaviour
             yield return null;
         }
 
-        //oldpath
-        //NextLocation = new Vector3(-0.86f, 0, -0.13f);
-
-        //while (Vector3.Distance(gameObject.transform.position, NextLocation) > 0.1f)
-        //{
-        //    gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, NextLocation, MovingSpeed * Time.deltaTime);
-        //    yield return null;
-        //}
-
-        ////rotate the right way;
-        //EndRotation = new Vector3(EndRotation.x, 90, EndRotation.z);
-
-        //while (Vector3.Distance(gameObject.transform.localEulerAngles, EndRotation) > 0.1f)
-        //{
-        //    gameObject.transform.localEulerAngles = Vector3.MoveTowards(gameObject.transform.localEulerAngles, EndRotation, RotationSpeed * Time.deltaTime);
-        //    yield return null;
-        //}
-
-        //NextLocation = new Vector3(2.22f, 0, -0.13f);
-
-        //while (Vector3.Distance(gameObject.transform.position, NextLocation) > 0.1f)
-        //{
-        //    gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, NextLocation, MovingSpeed * Time.deltaTime);
-        //    yield return null;
-        //}
-
-
         GameObject SpawnendLibraryCard = Instantiate(LibraryCard);
         SpawnendLibraryCard.transform.position = new Vector3(2.56f, 1.15f, -0.31f);
         StartCoroutine(SpawnendLibraryCard.GetComponent<MoveLibraryCard>().MoveBack());

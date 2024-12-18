@@ -52,7 +52,7 @@ public class BookStateHandler : MonoBehaviour
                     }
                     if (hit.transform.gameObject.tag == "BookCar")
                     {
-                        if (WantsToMoveTheBook)
+                        if (WantsToMoveTheBook && bookCheckScript.BookHasBeenChecked)
                         {
                             StartCoroutine(MoveBookToCar());
                             WantsToMoveTheBook = false;
@@ -153,6 +153,8 @@ public class BookStateHandler : MonoBehaviour
             yield return null;
         }
 
+        bookCheckScript.PlayerThinkBookIsGood();
+
         bookCarHandler.BooksOnCar.Add(Book);
         StartCoroutine(bookCheckScript.HideBook());
     }
@@ -162,7 +164,7 @@ public class BookStateHandler : MonoBehaviour
         //rotating
         float Speed = 90f;
 
-        while (Vector3.Distance(Book.transform.localEulerAngles, new Vector3(Book.transform.localEulerAngles.x, bookCarHandler.RotateAmount, Book.transform.localEulerAngles.z)) > 1f)
+        while (Vector3.Distance(Book.transform.localEulerAngles, new Vector3(Book.transform.localEulerAngles.x, bookCarHandler.RotateAmount, Book.transform.localEulerAngles.z)) > 2f)
         {
             Book.transform.localEulerAngles = Vector3.MoveTowards(Book.transform.localEulerAngles, new Vector3(Book.transform.localEulerAngles.x, bookCarHandler.RotateAmount, Book.transform.localEulerAngles.z), Speed * Time.deltaTime);
             yield return null;
